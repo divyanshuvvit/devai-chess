@@ -6,7 +6,9 @@ pipeline {
         AWS_REGION = 'ap-south-1'
         ECR_REPOSITORY = 'devai-chess'
         AWS_ACCOUNT_ID = '988031158209'
+
         IMAGE_TAG = "${BUILD_NUMBER}"
+
         ECR_REGISTRY = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
         ECR_IMAGE = "${ECR_REGISTRY}/${ECR_REPOSITORY}"
     }
@@ -28,10 +30,13 @@ pipeline {
             }
         }
 
-        stage('Docker Test') {
+        stage('Trivy Security Scan') {
             steps {
                 sh '''
-                    docker images ${ECR_IMAGE}
+                    trivy image \
+                    --exit-code 0 \
+                    --severity HIGH,CRITICAL \
+                    ${ECR_IMAGE}:${IMAGE_TAG}
                 '''
             }
         }
@@ -50,12 +55,17 @@ pipeline {
     }
 
     post {
+
         success {
-            echo 'DevAI Chess Docker image successfully pushed to ECR.'
+            echo 'DevAI Chess Docker image successfully built, scanned, and pushed to ECR.'
         }
 
         failure {
             echo 'DevAI Chess pipeline failed.'
+        }
+
+        always {
+            echo 'DevAI Chess CI/CD pipeline execution completed.'
         }
     }
 }
