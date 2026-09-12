@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="DEV CHESS — Play chess against DEV AI or challenge a friend."
+    >
+
+    <title>DEV CHESS</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div id="app">
+
+
+        <!-- =====================================
+             LANDING SCREEN
+        ====================================== -->
+
+        <section
+            id="landing-screen"
+            class="screen active"
+        >
+
+            <div class="landing-container">
+
+                <div class="logo">
+
+                    <span class="logo-knight">
+                        ♞
+                    </span>
+
+                    <h1>
+                        DEV CHESS
+                    </h1>
+
+                </div>
+
+
+                <p class="tagline">
+                    Challenge yourself. Challenge DEV AI.
+                </p>
+
+
+                <div class="mode-container">
+
+                    <button
+                        id="ai-mode-btn"
+                        class="mode-card"
+                    >
+
+                        <span class="mode-icon">
+                            ♟
+                        </span>
+
+                        <span class="mode-title">
+                            Play vs DEV AI
+                        </span>
+
+                        <span class="mode-description">
+                            Challenge the intelligent DEV AI
+                            chess engine.
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        id="local-mode-btn"
+                        class="mode-card"
+                    >
+
+                        <span class="mode-icon">
+                            ♟♟
+                        </span>
+
+                        <span class="mode-title">
+                            Play with Friend
+                        </span>
+
+                        <span class="mode-description">
+                            Play chess with another person
+                            on this device.
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="landing-footer">
+
+                    <span>
+                        DEV CHESS
+                    </span>
+
+                    <span>
+                        •
+                    </span>
+
+                    <span>
+                        Powered by DEV AI
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             SETUP SCREEN
+        ====================================== -->
+
+        <section
+            id="setup-screen"
+            class="screen"
+        >
+
+            <div class="setup-container">
+
+
+                <button
+                    id="setup-back-btn"
+                    class="setup-back"
+                >
+                    ← Back
+                </button>
+
+
+                <div class="setup-header">
+
+                    <div class="setup-logo">
+                        ♞
+                    </div>
+
+                    <h1 id="setup-title">
+                        Play vs DEV AI
+                    </h1>
+
+                    <p id="setup-subtitle">
+                        Configure your game before
+                        challenging DEV AI.
+                    </p>
+
+                </div>
+
+
+
+                <!-- AI SETTINGS -->
+
+                <div
+                    id="ai-settings"
+                    class="settings-section"
+                >
+
+
+                    <!-- COLOR -->
+
+                    <div class="setting-group">
+
+                        <h3>
+                            Choose your side
+                        </h3>
+
+
+                        <div class="choice-grid">
+
+
+                            <button
+                                class="choice-card color-choice selected"
+                                data-color="white"
+                            >
+
+                                <span class="choice-icon">
+                                    ♙
+                                </span>
+
+                                <span class="choice-title">
+                                    White
+                                </span>
+
+                                <span class="choice-description">
+                                    You move first
+                                </span>
+
+                            </button>
+
+
+
+                            <button
+                                class="choice-card color-choice"
+                                data-color="black"
+                            >
+
+                                <span class="choice-icon">
+                                    ♟
+                                </span>
+
+                                <span class="choice-title">
+                                    Black
+                                </span>
+
+                                <span class="choice-description">
+                                    DEV AI moves first
+                                </span>
+
+                            </button>
+
+
+
+                            <button
+                                class="choice-card color-choice"
+                                data-color="random"
+                            >
+
+                                <span class="choice-icon">
+                                    ?
+                                </span>
+
+                                <span class="choice-title">
+                                    Random
+                                </span>
+
+                                <span class="choice-description">
+                                    Let fate decide
+                                </span>
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DIFFICULTY -->
+
+                    <div class="setting-group">
+
+                        <h3>
+                            DEV AI difficulty
+                        </h3>
+
+
+                        <div class="difficulty-list">
+
+
+                            <button
+                                class="difficulty-option"
+                                data-level="beginner"
+                            >
+
+                                <span>
+                                    Beginner
+                                </span>
+
+                                <small>
+                                    Learning the basics
+                                </small>
+
+                            </button>
+
+
+
+                            <button
+                                class="difficulty-option"
+                                data-level="casual"
+                            >
+
+                                <span>
+                                    Casual
+                                </span>
+
+                                <small>
+                                    Relaxed opponent
+                                </small>
+
+                            </button>
+
+
+
+                            <button
+                                class="difficulty-option selected"
+                                data-level="intermediate"
+                            >
+
+                                <span>
+                                    Intermediate
+                                </span>
+
+                                <small>
+                                    A balanced challenge
+                                </small>
+
+                            </button>
+
+
+
+                            <button
+                                class="difficulty-option"
+                                data-level="advanced"
+                            >
+
+                                <span>
+                                    Advanced
+                                </span>
+
+                                <small>
+                                    Strong tactical play
+                                </small>
+
+                            </button>
+
+
+
+                            <button
+                                class="difficulty-option"
+                                data-level="expert"
+                            >
+
+                                <span>
+                                    Expert
+                                </span>
+
+                                <small>
+                                    Very difficult
+                                </small>
+
+                            </button>
+
+
+
+                            <button
+                                class="difficulty-option"
+                                data-level="master"
+                            >
+
+                                <span>
+                                    Master
+                                </span>
+
+                                <small>
+                                    Extremely strong
+                                </small>
+
+                            </button>
+
+
+
+                            <button
+                                class="difficulty-option dev-ai-level"
+                                data-level="dev-ai"
+                            >
+
+                                <span>
+                                    DEV AI
+                                </span>
+
+                                <small>
+                                    Maximum available strength
+                                </small>
+
+                            </button>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- LOCAL MULTIPLAYER SETTINGS -->
+
+                <div
+                    id="local-settings"
+                    class="settings-section hidden"
+                >
+
+                    <div class="setting-group">
+
+                        <h3>
+                            Local multiplayer
+                        </h3>
+
+
+                        <div class="local-preview">
+
+
+                            <div class="local-player">
+
+                                <span>
+                                    ♙
+                                </span>
+
+                                <strong>
+                                    Player 1
+                                </strong>
+
+                                <small>
+                                    White
+                                </small>
+
+                            </div>
+
+
+                            <div class="vs">
+                                VS
+                            </div>
+
+
+                            <div class="local-player">
+
+                                <span>
+                                    ♟
+                                </span>
+
+                                <strong>
+                                    Player 2
+                                </strong>
+
+                                <small>
+                                    Black
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TIME CONTROL -->
+
+                <div class="setting-group">
+
+                    <h3>
+                        Time control
+                    </h3>
+
+
+                    <div class="time-grid">
+
+
+                        <button
+                            class="time-option selected"
+                            data-time="0"
+                        >
+
+                            <strong>
+                                No Timer
+                            </strong>
+
+                            <small>
+                                Unlimited
+                            </small>
+
+                        </button>
+
+
+
+                        <button
+                            class="time-option"
+                            data-time="60"
+                        >
+
+                            <strong>
+                                1 min
+                            </strong>
+
+                            <small>
+                                Bullet
+                            </small>
+
+                        </button>
+
+
+
+                        <button
+                            class="time-option"
+                            data-time="180"
+                        >
+
+                            <strong>
+                                3 min
+                            </strong>
+
+                            <small>
+                                Blitz
+                            </small>
+
+                        </button>
+
+
+
+                        <button
+                            class="time-option"
+                            data-time="300"
+                        >
+
+                            <strong>
+                                5 min
+                            </strong>
+
+                            <small>
+                                Blitz
+                            </small>
+
+                        </button>
+
+
+
+                        <button
+                            class="time-option"
+                            data-time="600"
+                        >
+
+                            <strong>
+                                10 min
+                            </strong>
+
+                            <small>
+                                Rapid
+                            </small>
+
+                        </button>
+
+
+
+                        <button
+                            class="time-option"
+                            data-time="900"
+                        >
+
+                            <strong>
+                                15 min
+                            </strong>
+
+                            <small>
+                                Rapid
+                            </small>
+
+                        </button>
+
+
+
+                        <button
+                            class="time-option"
+                            data-time="1800"
+                        >
+
+                            <strong>
+                                30 min
+                            </strong>
+
+                            <small>
+                                Classical
+                            </small>
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- INCREMENT (only relevant with a timer, kept simple/optional) -->
+
+                <div class="setting-group">
+
+                    <h3>
+                        Board orientation
+                    </h3>
+
+                    <div class="choice-grid choice-grid-2">
+
+                        <button
+                            class="choice-card orientation-choice selected"
+                            data-orientation="auto"
+                        >
+                            <span class="choice-icon">♞</span>
+                            <span class="choice-title">Auto</span>
+                            <span class="choice-description">Matches your side</span>
+                        </button>
+
+                        <button
+                            class="choice-card orientation-choice"
+                            data-orientation="flip-each-move"
+                        >
+                            <span class="choice-icon">🔄</span>
+                            <span class="choice-title">Flip each move</span>
+                            <span class="choice-description">Great for pass-and-play</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- START GAME -->
+
+                <button
+                    id="start-game-btn"
+                    class="start-game-btn"
+                >
+
+                    <span>
+                        ♟
+                    </span>
+
+                    Start Game
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             GAME SCREEN
+        ====================================== -->
+
+        <section
+            id="game-screen"
+            class="screen"
+        >
+
+
+            <header class="game-header">
+
+                <div class="brand">
+
+                    <span>
+                        ♞
+                    </span>
+
+                    <strong>
+                        DEV CHESS
+                    </strong>
+
+                </div>
+
+                <div
+                    id="eval-display"
+                    class="eval-display hidden"
+                >
+                    +0.0
+                </div>
+
+                <div class="game-header-actions">
+
+                    <button
+                        id="sound-btn"
+                        class="icon-button sound-button"
+                        aria-label="Mute game sounds"
+                        aria-pressed="false"
+                        title="Mute game sounds"
+                    >
+                        🔊
+                    </button>
+
+                    <button
+                        id="menu-btn"
+                        class="back-to-menu-btn"
+                        aria-label="Back to main menu"
+                        title="Back to main menu"
+                    >
+                        <span class="back-arrow">←</span>
+                        <span>Back to Menu</span>
+                    </button>
+
+                </div>
+
+            </header>
+
+
+
+            <main class="game-layout">
+
+
+                <!-- OPPONENT -->
+
+                <div class="player-panel player-top">
+
+                    <div class="player-info">
+
+                        <div class="player-avatar">
+                            ♟
+                        </div>
+
+                        <div>
+
+                            <h2 id="opponent-name">
+                                DEV AI
+                            </h2>
+
+                            <p id="opponent-status">
+                                Waiting...
+                            </p>
+
+                            <div id="opponent-captured" class="captured-pieces"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="opponent-clock"
+                        class="clock"
+                    >
+                        10:00
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOARD -->
+
+                <div class="board-wrapper">
+
+                    <div class="board-frame">
+
+                        <div class="board-top-label">DEV CHESS • LIVE BOARD</div>
+
+                        <div
+                            id="chess-board"
+                            class="chess-board"
+                        >
+
+                        <!-- Chess board generated by JavaScript -->
+
+                        </div>
+
+                        <div class="board-bottom-label">YOUR MOVE • PLAY SMART</div>
+
+                    </div>
+
+                    <div id="review-bar" class="review-bar hidden">
+                        <span id="review-label">Reviewing move 0</span>
+                        <button id="review-live-btn">Back to Live ▶</button>
+                    </div>
+
+                </div>
+
+
+
+                <!-- PLAYER -->
+
+                <div class="player-panel player-bottom">
+
+                    <div class="player-info">
+
+                        <div class="player-avatar">
+                            ♙
+                        </div>
+
+                        <div>
+
+                            <h2 id="player-name">
+                                You
+                            </h2>
+
+                            <p id="player-status">
+                                Your turn
+                            </p>
+
+                            <div id="player-captured" class="captured-pieces"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="player-clock"
+                        class="clock active-clock"
+                    >
+                        10:00
+                    </div>
+
+                </div>
+
+
+
+                <!-- CONTROLS -->
+
+                <div class="game-controls">
+
+
+                    <button id="undo-btn" title="Undo last move">
+
+                        <span class="control-icon">
+                            ↶
+                        </span>
+
+                        <span>
+                            Undo
+                        </span>
+
+                    </button>
+
+
+
+                    <button id="restart-btn" title="Restart the game">
+
+                        <span class="control-icon">
+                            ↻
+                        </span>
+
+                        <span>
+                            Restart
+                        </span>
+
+                    </button>
+
+
+
+                    <button id="hint-btn" title="Show a suggested move">
+
+                        <span class="control-icon">
+                            💡
+                        </span>
+
+                        <span>
+                            Hint
+                        </span>
+
+                    </button>
+
+
+
+                    <button id="analysis-btn" title="Toggle live evaluation">
+
+                        <span class="control-icon">
+                            ♙
+                        </span>
+
+                        <span>
+                            Analysis
+                        </span>
+
+                    </button>
+
+
+                    <button id="flip-btn" title="Flip the board">
+
+                        <span class="control-icon">
+                            ⇅
+                        </span>
+
+                        <span>
+                            Flip
+                        </span>
+
+                    </button>
+
+
+                    <button id="pgn-btn" title="Copy PGN to clipboard">
+
+                        <span class="control-icon">
+                            📋
+                        </span>
+
+                        <span>
+                            PGN
+                        </span>
+
+                    </button>
+
+
+                    <button id="draw-btn" title="Claim or offer a draw">
+
+                        <span class="control-icon">
+                            ½
+                        </span>
+
+                        <span>
+                            Draw
+                        </span>
+
+                    </button>
+
+
+                    <button id="resign-btn" title="Resign the game">
+
+                        <span class="control-icon">
+                            🏳
+                        </span>
+
+                        <span>
+                            Resign
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- MOVE HISTORY -->
+
+                <aside class="move-history">
+
+                    <div class="section-header">
+
+                        <h3>
+                            Moves
+                        </h3>
+
+                        <span id="material-diff" class="material-diff"></span>
+
+                        <span id="move-count">
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="moves-list"
+                        class="moves-list"
+                    >
+
+                        <p class="empty-message">
+                            No moves yet
+                        </p>
+
+                    </div>
+
+                </aside>
+
+
+            </main>
+
+        </section>
+
+
+
+        <!-- =====================================
+             PROMOTION MODAL
+        ====================================== -->
+
+        <div
+            id="promotion-modal"
+            class="modal hidden"
+        >
+
+            <div class="modal-content promotion-content">
+
+                <h2>
+                    Promote pawn
+                </h2>
+
+                <p>
+                    Choose a piece
+                </p>
+
+                <div
+                    id="promotion-choices"
+                    class="promotion-choices"
+                >
+                    <!-- Populated by JavaScript -->
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             CONFIRM MODAL (resign / draw / etc.)
+        ====================================== -->
+
+        <div
+            id="confirm-modal"
+            class="modal hidden"
+        >
+
+            <div class="modal-content confirm-content">
+
+                <h2 id="confirm-title">Are you sure?</h2>
+
+                <p id="confirm-message">This action cannot be undone.</p>
+
+                <div class="result-actions">
+
+                    <button id="confirm-yes-btn">Yes</button>
+                    <button id="confirm-no-btn">Cancel</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             GAME OVER CELEBRATION
+        ====================================== -->
+
+        <div
+            id="celebration-layer"
+            class="celebration-layer"
+            aria-hidden="true"
+        ></div>
+
+
+        <!-- =====================================
+             GAME OVER MODAL
+        ====================================== -->
+
+        <div
+            id="game-over-modal"
+            class="modal hidden"
+        >
+
+            <div class="modal-content result-card">
+
+
+                <div
+                    id="result-icon"
+                    class="result-icon"
+                >
+                    ♛
+                </div>
+
+
+                <h2 id="result-title">
+                    Checkmate
+                </h2>
+
+
+                <p id="result-message">
+                    DEV AI wins the game.
+                </p>
+
+
+                <div class="result-actions">
+
+
+                    <button id="new-game-btn">
+                        New Game
+                    </button>
+
+
+                    <button id="review-game-btn">
+                        Close
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             TOAST
+        ====================================== -->
+
+        <div id="toast" class="toast hidden"></div>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         APPLICATION JAVASCRIPT
+    ====================================== -->
+
+    <script
+        type="module"
+        src="js/app.js"
+    ></script>
+
+
+</body>
+
+</html>
