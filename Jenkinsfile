@@ -37,7 +37,6 @@ pipeline {
                 sh '''
                     trivy image \
                     --exit-code 0 \
-                    --severity HIGH,CRITICAL \
                     ${ECR_IMAGE}:${IMAGE_TAG}
                 '''
             }
@@ -114,5 +113,5 @@ pipeline {
             echo 'DevAI Chess pipeline execution completed.'
         }
     }
-    
+
 }
