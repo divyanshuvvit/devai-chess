@@ -41,6 +41,17 @@ pipeline {
             }
         }
 
+        stage('Docker Scout Security Scan') {
+            steps {
+                sh '''
+                    docker scout cves \
+                    ${ECR_IMAGE}:${IMAGE_TAG} \
+                    --only-severity critical,high \
+                    --exit-code 0
+                '''
+            }
+        }
+
         stage('Push to ECR') {
             steps {
                 sh '''
@@ -53,7 +64,38 @@ pipeline {
             }
         }
     }
+    stage('Deploy to EKS') {
+    steps {
+        sh '''
+            aws eks update-kubeconfig \
+                --region ${AWS_REGION} \
+                --name devai-chess-eks \
+                --kubeconfig /var/lib/jenkins/.kube/config
 
+            kubectl \
+                --kubeconfig /var/lib/jenkins/.kube/config \
+                apply -f k8s/deployment.yaml \
+                -n devai-chess
+
+            kubectl \
+                --kubeconfig /var/lib/jenkins/.kube/config \
+                apply -f k8s/service.yaml \
+                -n devai-chess
+
+            kubectl \
+                --kubeconfig /var/lib/jenkins/.kube/config \
+                set image deployment/devai-chess \
+                devai-chess=${ECR_IMAGE}:${IMAGE_TAG} \
+                -n devai-chess
+
+            kubectl \
+                --kubeconfig /var/lib/jenkins/.kube/config \
+                rollout status deployment/devai-chess \
+                -n devai-chess \
+                --timeout=180s
+        '''
+    }
+}
     post {
 
         success {
@@ -65,7 +107,7 @@ pipeline {
         }
 
         always {
-            echo 'DevAI Chess CI/CD pipeline execution completed.'
+            echo 'DevAI Chess pipeline execution completed.'
         }
     }
 }
