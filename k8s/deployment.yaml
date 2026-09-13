@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devai-chess
+  labels:
+    app: devai-chess
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devai-chess
+  template:
+    metadata:
+      labels:
+        app: devai-chess
+    spec:
+      containers:
+        - name: devai-chess
+          image: 988031158209.dkr.ecr.ap-south-1.amazonaws.com/devai-chess:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
