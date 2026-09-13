@@ -11,6 +11,8 @@ pipeline {
 
         ECR_REGISTRY = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
         ECR_IMAGE = "${ECR_REGISTRY}/${ECR_REPOSITORY}"
+
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
 
     stages {
@@ -63,43 +65,45 @@ pipeline {
                 '''
             }
         }
+
+        stage('Deploy to EKS') {
+            steps {
+                sh '''
+                    aws eks update-kubeconfig \
+                        --region ${AWS_REGION} \
+                        --name devai-chess-eks \
+                        --kubeconfig ${KUBECONFIG}
+
+                    kubectl \
+                        --kubeconfig ${KUBECONFIG} \
+                        apply -f k8s/deployment.yaml \
+                        -n devai-chess
+
+                    kubectl \
+                        --kubeconfig ${KUBECONFIG} \
+                        apply -f k8s/service.yaml \
+                        -n devai-chess
+
+                    kubectl \
+                        --kubeconfig ${KUBECONFIG} \
+                        set image deployment/devai-chess \
+                        devai-chess=${ECR_IMAGE}:${IMAGE_TAG} \
+                        -n devai-chess
+
+                    kubectl \
+                        --kubeconfig ${KUBECONFIG} \
+                        rollout status deployment/devai-chess \
+                        -n devai-chess \
+                        --timeout=180s
+                '''
+            }
+        }
     }
-    stage('Deploy to EKS') {
-    steps {
-        sh '''
-            aws eks update-kubeconfig \
-                --region ${AWS_REGION} \
-                --name devai-chess-eks \
-                --kubeconfig /var/lib/jenkins/.kube/config
 
-            kubectl \
-                --kubeconfig /var/lib/jenkins/.kube/config \
-                apply -f k8s/deployment.yaml \
-                -n devai-chess
-
-            kubectl \
-                --kubeconfig /var/lib/jenkins/.kube/config \
-                apply -f k8s/service.yaml \
-                -n devai-chess
-
-            kubectl \
-                --kubeconfig /var/lib/jenkins/.kube/config \
-                set image deployment/devai-chess \
-                devai-chess=${ECR_IMAGE}:${IMAGE_TAG} \
-                -n devai-chess
-
-            kubectl \
-                --kubeconfig /var/lib/jenkins/.kube/config \
-                rollout status deployment/devai-chess \
-                -n devai-chess \
-                --timeout=180s
-        '''
-    }
-}
     post {
 
         success {
-            echo 'DevAI Chess Docker image successfully built, scanned, and pushed to ECR.'
+            echo 'DevAI Chess CI/CD pipeline completed successfully.'
         }
 
         failure {
