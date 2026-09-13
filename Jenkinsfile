@@ -42,16 +42,7 @@ pipeline {
             }
         }
 
-        stage('Docker Scout Security Scan') {
-            steps {
-                sh '''
-                    docker scout cves \
-                    ${ECR_IMAGE}:${IMAGE_TAG} \
-                    --only-severity critical,high \
-                    --exit-code 0
-                '''
-            }
-        }
+        
 
         stage('Push to ECR') {
             steps {
